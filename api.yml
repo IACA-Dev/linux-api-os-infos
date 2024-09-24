@@ -42,6 +42,29 @@ paths:
         '404':
           description: Vitals with given ID doesn't exist.
 
+  /network/interface/{name}:
+    parameters:
+      - name: name
+        description: Name of interface
+        in: path
+
+    get:
+      summary: Get one interface
+      description: Retrieve on interface with given name.
+      tags:
+        - Network
+      responses:
+        '200':
+          description: A JSON Interface infos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Interface'
+
+        '404':
+          description: Interface with given name doesn't exist.
+  
+
 components:
   schemas:
     Vital:
@@ -59,3 +82,18 @@ components:
         unit:
           type: string
           example: bpm
+    Interface:
+      type: object
+      properties:
+        name:
+          type: string
+          example: eth0
+        ip:
+          type: string
+          example: 10.1.1.30
+        mac:
+          type: string
+          example: 'aa:bb:cc:dd:ee:ff'
+        mask:
+          type: string
+          example: 255.255.255.0
