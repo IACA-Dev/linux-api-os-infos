@@ -65,6 +65,25 @@ npm run build
 npm run start:dev
 ```
 
+## 📦️ Docker
+
+### Build
+
+```bash
+docker build --tag linux-api-os-infos .
+```
+
+> You can change tag like you want.
+
+### Run
+
+```bash
+docker run -e API_PORT=<port> --rm -p <port>:<port> linux-api-os-infos
+```
+
+> Change `port` with your port.
+
+
 ## API Documentations
 
 ### Open API 
