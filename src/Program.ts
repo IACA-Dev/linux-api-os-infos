@@ -1,11 +1,11 @@
-import * as express from "express";
-import * as cors from "cors";
-import * as bodyParser from "body-parser";
+import express from "express";
+import cors from "cors";
 import {Express} from "express";
 import {VitalsRouteV1} from "./routes/VitalsRouteV1";
 import {VitalsControllerImpl} from "./controllers/VitalsControllerImpl";
 import {VitalsServiceImpl} from "./services/VitalsServiceImpl";
 import {isNotUndefined} from "./utils/Types";
+import bodyParser from "body-parser";
 
 export default class Program {
 
