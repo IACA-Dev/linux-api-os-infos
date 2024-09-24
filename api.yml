@@ -20,6 +20,27 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Vital'
+  /vitals/{id}:
+    parameters:
+      - name: id
+        description: Id of vitals (see docs)
+        in: path
+
+    get:
+      summary: Get One Vitals
+      description: Retrieve one vitals with given id.
+      tags:
+        - Vitals
+      responses:
+        '200':
+          description: A JSON Vitals
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vital'
+
+        '404':
+          description: Vitals with given ID doesn't exist.
 
 components:
   schemas:
