@@ -15,8 +15,11 @@ export class VitalsControllerImpl implements VitalsController{
     // ---------------------------------------------------------------------------------------------------------------
 
     getVitals(req: Request, res: Response) : void{
-
-        res.end(JSON.stringify(this.service.getAll()))
+        this.service.getAll().then((vitals) => {
+            res.end(JSON.stringify(vitals))
+        }).catch((err) => {
+            res.status(500).end(JSON.stringify(err));
+        });
 
     }
 }
