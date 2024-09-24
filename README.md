@@ -23,10 +23,11 @@ ___
 4. [Build](#-build)
 5. [Run](#-run)
     1. [Hot run (development)](#hot-run-development)
-6. [API Documentations](#api-documentations)
+6. [Docker](#-docker)
+7. [API Documentations](#api-documentations)
     1. [Open API](#open-api-)
     2. [Vitals Mapping](#vitals-mapping)
-7. [Contributors](#-contributors)
+8. [Contributors](#-contributors)
 
 ___
 
@@ -67,6 +68,14 @@ npm run start:dev
 
 ## 📦️ Docker
 
+### From Docker Hub (easy way)
+
+```bash
+docker run -e API_PORT=<port> --rm -p <port>:<port> iacaelectronique/linux-api-os-infos
+```
+
+> Change `port` with your port.
+> 
 ### Build
 
 ```bash
