@@ -1,31 +1,59 @@
 import {VitalsService} from "./VitalsService";
 import {VitalsModel} from "../models/VitalsModel";
 import * as os from 'os'
+import {NotFoundError} from "../errors/NotFoundError";
 
 
 export class VitalsServiceImpl implements VitalsService {
+
     async getAll(): Promise<VitalsModel[]> {
         return [
-            {
-                name: 'total ram',
-                unit: 'bytes',
-                value: os.totalmem(),
-                id: 0
-            },
-            {
-                name: 'used ram',
-                unit: 'bytes',
-                value: os.totalmem() - os.freemem(),
-                id: 1
-            },
-            {
-                name: 'cpu usage',
-                unit: '%',
-                value: await this.getCpuUsage(),
-                id: 2
-            }
+            await this.get(0),
+            await this.get(1),
+            await this.get(2)
         ];
     }
+
+    // ---------------------------------------------------------------------------------------------------------------
+
+    async get(id: number): Promise<VitalsModel> {
+        let vitals : VitalsModel;
+        switch (id) {
+            case 0: {
+                vitals = {
+                    name: 'total ram',
+                    unit: 'bytes',
+                    value: os.totalmem(),
+                    id: 0
+                };
+                break;
+            }
+            case 1: {
+                vitals =             {
+                    name: 'used ram',
+                    unit: 'bytes',
+                    value: os.totalmem() - os.freemem(),
+                    id: 1
+                };
+                break;
+            }
+            case 2: {
+                vitals =             {
+                    name: 'cpu usage',
+                    unit: '%',
+                    value: await this.getCpuUsage(),
+                    id: 2
+                };
+                break;
+            }
+            default:
+                throw new NotFoundError(`Vitals with id ${id} does not exist.`);
+        }
+
+        return vitals;
+    }
+
+    // ###############################################################################################################
 
     private async getCpuUsage() {
         const startMeasure = this.getCpuInfo();
