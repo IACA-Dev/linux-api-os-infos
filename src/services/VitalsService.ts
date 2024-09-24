@@ -3,6 +3,6 @@ import {VitalsModel} from "../models/VitalsModel";
 
 export interface VitalsService {
 
-    getAll() : VitalsModel[];
+    getAll() : Promise<VitalsModel[]>;
 
 }
