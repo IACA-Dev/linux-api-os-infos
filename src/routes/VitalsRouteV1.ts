@@ -17,6 +17,10 @@ export class VitalsRouteV1 {
         this._router.get(`${this._path}`, (req: Request, res: Response) => {
             this.controller.getVitals(req, res);
         });
+
+        this._router.get(`${this._path}/:id`, (req: Request, res: Response) => {
+            this.controller.getVitalsById(req, res);
+        });
     }
 
 
