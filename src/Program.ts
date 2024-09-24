@@ -6,6 +6,9 @@ import {VitalsControllerImpl} from "./controllers/VitalsControllerImpl";
 import {VitalsServiceImpl} from "./services/VitalsServiceImpl";
 import {isNotUndefined} from "./utils/Types";
 import bodyParser from "body-parser";
+import {NetworkRouteV1} from "./routes/NetworkRouteV1";
+import {NetworkServiceImpl} from "./services/NetworkServiceImpl";
+import {NetworkControllerImpl} from "./controllers/NetworkControllerImpl";
 
 export default class Program {
 
@@ -13,7 +16,8 @@ export default class Program {
 
     private readonly routes?: {
         v1: {
-            vitals: VitalsRouteV1
+            vitals: VitalsRouteV1,
+            network: NetworkRouteV1
         }
     }
 
@@ -21,9 +25,11 @@ export default class Program {
         this.httpServer = express();
 
         const vitalsController = new VitalsControllerImpl(new VitalsServiceImpl());
+         const networkController = new NetworkControllerImpl(new NetworkServiceImpl());
         this.routes = {
             v1: {
-                vitals: new VitalsRouteV1(vitalsController)
+                vitals: new VitalsRouteV1(vitalsController),
+                network: new NetworkRouteV1(networkController)
             }
         };
     }
@@ -48,6 +54,7 @@ export default class Program {
 
         if (isNotUndefined(this.routes)) {
             this.httpServer.use(this.routes!.v1.vitals.router);
+            this.httpServer.use(this.routes!.v1.network.router);
         }
 
         this.httpServer.listen(port, () => {
